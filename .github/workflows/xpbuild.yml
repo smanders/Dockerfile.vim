@@ -1,7 +1,4 @@
 name: Build
-permissions:
-  contents: read
-  pull-requests: write
 on:
   push:
     branches: [ "dev" ]
@@ -9,9 +6,15 @@ on:
     branches: [ "dev" ]
   workflow_dispatch:
 jobs:
-  macos:
-    uses: externpro/externpro/.github/workflows/build-macos.yml@25.06.1
+  linux:
+    permissions:
+      contents: read
+      pull-requests: write
+      packages: write
+    uses: externpro/externpro/.github/workflows/build-linux.yml@25.06.3
     with:
-      artifact-pattern: "${{ github.event.repository.name }}-*.sh"
-      cmake-workflow-preset: DarwinRelease
+      artifact-pattern: "${{ github.event.repository.name }}-*.rpm"
+      cmake-workflow-preset: LinuxRelease
+      arch-list: '["amd64"]'
+      buildpro-images: '["rocky9-gcc13"]'
     secrets: inherit
