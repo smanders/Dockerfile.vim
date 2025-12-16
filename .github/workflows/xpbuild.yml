@@ -11,7 +11,7 @@ jobs:
       contents: read
       pull-requests: write
       packages: write
-    uses: externpro/externpro/.github/workflows/build-linux.yml@25.06.2
+    uses: externpro/externpro/.github/workflows/build-linux.yml@main
     with:
       artifact-pattern: "${{ github.event.repository.name }}-*.rpm"
       cmake-workflow-preset: LinuxRelease
