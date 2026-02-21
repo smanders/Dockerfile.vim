@@ -1,9 +1,12 @@
-name: Build
+name: xpBuild
+permissions:
+  contents: read
+  pull-requests: write
 on:
   push:
-    branches: [ "dev" ]
+    tags: ["xpv*"]
   pull_request:
-    branches: [ "dev" ]
+    branches: ["xpro"]
   workflow_dispatch:
 jobs:
   linux:
@@ -11,10 +14,11 @@ jobs:
       contents: read
       pull-requests: write
       packages: write
-    uses: externpro/externpro/.github/workflows/build-linux.yml@25.06.3
+    uses: externpro/externpro/.github/workflows/build-linux.yml@25.07.12
+    secrets:
+      automation_token: ${{ secrets.GHCR_TOKEN }}
     with:
-      artifact-pattern: "${{ github.event.repository.name }}-*.rpm"
-      cmake-workflow-preset: LinuxRelease
-      arch-list: '["amd64"]'
-      buildpro-images: '["rocky9-gcc13"]'
-    secrets: inherit
+      artifact_pattern: "${{ github.event.repository.name }}-*.rpm"
+      cmake_workflow_preset: LinuxRelease
+      arch_list: '["amd64"]'
+      buildpro_images: '["rocky9-gcc13"]'
