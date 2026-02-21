@@ -1,4 +1,4 @@
-name: Release
+name: xpRelease
 on:
   workflow_dispatch:
     inputs:
@@ -6,15 +6,7 @@ on:
         description: 'URL of the workflow run containing artifacts to upload (e.g., https://github.com/owner/repo/actions/runs/123456789)'
         required: true
         type: string
+  workflow_run:
+    workflows: ["xpBuild"]
+    types: [completed]
 jobs:
-  # Upload build artifacts as release assets
-  release-from-build:
-    uses: externpro/externpro/.github/workflows/release-from-build.yml@25.06.3
-    with:
-      workflow_run_url: ${{ github.event.inputs.workflow_run_url }}
-      artifact_pattern: "*.rpm"
-    permissions:
-      contents: write
-      id-token: write
-      attestations: write
-    secrets: inherit
