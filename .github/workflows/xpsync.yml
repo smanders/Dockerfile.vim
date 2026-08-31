@@ -1,4 +1,4 @@
-name: xpInit externpro
+name: xpSync externpro
 permissions:
   contents: write
   pull-requests: write
@@ -6,7 +6,8 @@ permissions:
 on:
   workflow_dispatch:
 jobs:
-  init:
-    uses: externpro/externpro/.github/workflows/init-externpro.yml@main
+  sync:
+    uses: externpro/externpro/.github/workflows/sync-externpro.yml@main
     secrets:
       automation_token: ${{ secrets.XPRO_TOKEN }}
+    with: {}
